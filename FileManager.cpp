@@ -1,5 +1,15 @@
 #include "FileManager.h"
 
+FileManager* FileManager::instance = nullptr;
+FileManager* FileManager::getInstance()
+{
+
+	if (instance == nullptr){
+		instance = new FileManager();
+	}
+	return instance;
+}
+
 std::string FileManager::LoadFile(const std::string& filePath)
 {
 	std::ifstream file(filePath);

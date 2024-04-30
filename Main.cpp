@@ -1,19 +1,16 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "GameManager.h"
 
-using namespace std;
+
 
 int main()
 {
    
-
-    return 0;
+    GameManager * myManager = new GameManager();
    
-
-
-
-
-
-
+  
+    
+       return 0;
 }
