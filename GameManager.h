@@ -41,9 +41,11 @@ public:
 class GameManager
 {
 	public:
-        GameManager() { isOK(); };
+        GameManager() {};
 		GameInfo gi;
-        void isOK();
+        void Init();
+        void GameLoop();
+        void Render();
 	
 };
 

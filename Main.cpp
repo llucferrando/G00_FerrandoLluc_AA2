@@ -5,12 +5,13 @@
 
 
 
-int main()
+void main()
 {
    
     GameManager * myManager = new GameManager();
-   
+    myManager->Init();
+    myManager->GameLoop();
+    myManager->Render();
   
     
-       return 0;
 }
