@@ -2,9 +2,11 @@
 #include "MapElements.h"
 class Pokemon : public MapElements
 {
-public:
+	public:
 	Pokemon();
-
+	~Pokemon();
+	Vector2D * pokePos;
+	
 
 };
 

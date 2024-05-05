@@ -1,18 +1,2 @@
-﻿  Ash.cpp
-  Box.cpp
-C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\MapElements.h(13,33): error C2061: error de sintaxis: identificador 'Ash'
-  (compilando archivo de origen "Ash.cpp")
-  
-C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\Ash.cpp(3,1): error C2512: 'MapElements': no hay disponible un constructor predeterminado adecuado
-  C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\MapElements.h(5,7):
-  vea la declaración de 'MapElements'
-  
-C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\Ash.h(6,20): error C2504: 'MapElements': clase base sin definir
-  (compilando archivo de origen "Box.cpp")
-  
-  MapElements.cpp
-C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\Ash.h(6,20): error C2504: 'MapElements': clase base sin definir
-  (compilando archivo de origen "MapElements.cpp")
-  
-  MapManager.cpp
-  Generando código...
+﻿  GameManager.cpp
+  G00_FerrandoLluc_AA2.vcxproj -> C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\x64\Debug\G00_FerrandoLluc_AA2.exe

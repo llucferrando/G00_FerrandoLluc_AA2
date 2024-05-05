@@ -1,48 +1,26 @@
 #pragma once
 #include "FileManager.h"
-struct GameInfo
-{
-public:
-	GameInfo() { Code("config.txt"); };
-	int ancho, alto, pokemonsPPaleta, minPokemonsPPaleta, pokemonsBosque, minPokemonsBosque = 0;
+#include "InputManager.h"
+#include "Vector2D.h"
+#include "Map.h"
+#include "GameConfigInfo.h"
+#include "Player.h"
+#include <cstdlib>
 
-	void Code(const std::string&filePath)
-	{
-		std::string data = FileManager::getInstance()->LoadFile(filePath);
-        if (data.empty()) {
-            std::cerr << "Error: archivo de configuración vacío" << std::endl;
-            return;
-        }
 
-        std::istringstream iss(data);
-        std::string token;
-
-        // Leemos los valores de cada línea y los asignamos a las variables correspondientes del struct
-        if (std::getline(iss, token, ';')) {
-            ancho = std::stoi(token);
-        }
-        if (std::getline(iss, token, ';')) {
-            alto = std::stoi(token);
-        }
-        if (std::getline(iss, token, ';')) {
-            pokemonsPPaleta = std::stoi(token);
-        }
-        if (std::getline(iss, token, ';')) {
-            minPokemonsPPaleta = std::stoi(token);
-        }
-        if (std::getline(iss, token, ';')) {
-            pokemonsBosque = std::stoi(token);
-        }
-        if (std::getline(iss, token)) {
-            minPokemonsBosque = std::stoi(token);
-        }
-    }
-};
 class GameManager
 {
 	public:
         GameManager() {};
-		GameInfo gi;
+		GameConfigInfo * gi = new GameConfigInfo;
+        Player* myPlayer = new Player();
+        Vector2D* movement = new Vector2D(0, 0);
+        InputManager* ip = new InputManager();
+        
+       
+        Map* myMap = new Map(gi);
+        bool isPlaying = true;
+
         void Init();
         void GameLoop();
         void Render();

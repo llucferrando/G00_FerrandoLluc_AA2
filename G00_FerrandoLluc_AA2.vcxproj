@@ -127,23 +127,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Ash.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="FileManager.h" />
+    <ClInclude Include="GameConfigInfo.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="MapElements.h" />
-    <ClInclude Include="MapManager.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Pokemon.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Ash.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="FileManager.cpp" />
+    <ClCompile Include="GameConfigInfo.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapElements.cpp" />
-    <ClCompile Include="MapManager.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Pokemon.cpp" />
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>

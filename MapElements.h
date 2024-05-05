@@ -1,16 +1,19 @@
 #pragma once
-#include "GameManager.h"
-#include "Ash.h"
-#include "MapManager.h"
+#include "Vector2D.h"
+#include <iostream>
+
+
+
 class MapElements
 {
 public:
-	MapElements(char myChar, Vector2D* position) :elementCharacter(myChar), mapElementPosition(position) {};
+	MapElements() = default;
+	MapElements(std::string myChar, Vector2D* position) : elementCharacter(myChar), mapElementPosition(position) {};
 
-	Vector2D* mapElementPosition;
-	char elementCharacter;
-
-	virtual void OnPlayerCollision(Ash* myPlayer, MapManager* myMapManager, Vector2D* movement) = 0;
+	Vector2D* mapElementPosition = new Vector2D(0,0);
+	std::string elementCharacter;
+	
+	//virtual void OnPlayerCollision(Player* myPlayer, MapManager* myMapManager, Vector2D* movement) = 0;
 
 };
 
