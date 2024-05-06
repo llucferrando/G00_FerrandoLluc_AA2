@@ -10,7 +10,7 @@ void main()
    
     GameManager * myManager = new GameManager();
     myManager->Init();
-    myManager->GameLoop();
+   myManager->GameLoop();
     myManager->Render();
   
     

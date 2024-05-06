@@ -4,13 +4,16 @@
 #include "Player.h"
 #include "Pokemon.h"
 #include <vector>
+#include "Walls.h"
+#include "Door.h"
 
 class Map
 {
 public:
 	Map(GameConfigInfo* gameConfigInfo);
 
-	int mapID;
+	int halfY=0;
+	int halfX=0;
 	GameConfigInfo* gi;
 	
 	Box ** field;
@@ -18,8 +21,8 @@ public:
 	std::vector<Pokemon*> pokemons;
 	std::vector<MapElements*> newMapElements;
 	
-
-	void PrintMap();
+	
+	void PrintMap(Player* myPlayer);
 	void InitMap(Player * myPlayer);
 	void InitMapElements();
 

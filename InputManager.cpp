@@ -16,8 +16,7 @@ bool InputManager::Inputs(Vector2D * movement, bool &isPlaying)
         if (!upKeyPressed){
             upKeyPressed = true;
             movement->_y-=1;
-            
-           
+
         }
     }else{
         upKeyPressed = false;
@@ -37,6 +36,7 @@ bool InputManager::Inputs(Vector2D * movement, bool &isPlaying)
         if (!rightKeyPressed) {
             rightKeyPressed = true;
             movement->_x += 1;
+            
         }
     }
     else {
