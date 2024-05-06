@@ -1,0 +1,3 @@
+﻿  Map.cpp
+E:\1r CDI\PROGRAMACIÓ\Practiques\G00_FerrandoLluc_AA2\MapElements.h(6,20): warning C4091: 'extern ': ignored on left of 'Player' when no variable is declared
+  G00_FerrandoLluc_AA2.vcxproj -> E:\1r CDI\PROGRAMACIÓ\Practiques\G00_FerrandoLluc_AA2\x64\Debug\G00_FerrandoLluc_AA2.exe
