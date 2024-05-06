@@ -7,7 +7,7 @@ void GameManager::Init()
 	myMap->InitMap(myPlayer);
 	
 	
-	//myMap->PrintBoxInMap();
+	
 	
 
 }
@@ -20,7 +20,7 @@ void GameManager::GameLoop()
 		
 		
 		
-		ip->Inputs(movement,isPlaying);
+		/*ip->Inputs(movement, isPlaying);
 		myPlayer->myPosition->_x += movement->_x;
 		myPlayer->myPosition->_y += movement->_y;
 		movement->_x = 0;
@@ -28,7 +28,7 @@ void GameManager::GameLoop()
 
 		Render();
 		
-		Sleep(100);
+		Sleep(100);*/
 		
 	}
 	

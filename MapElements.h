@@ -3,7 +3,7 @@
 #include <iostream>
 
 
-
+extern class Player;
 class MapElements
 {
 public:
@@ -13,7 +13,7 @@ public:
 	Vector2D* mapElementPosition = new Vector2D(0,0);
 	std::string elementCharacter;
 	
-	//virtual void OnPlayerCollision(Player* myPlayer, MapManager* myMapManager, Vector2D* movement) = 0;
+	virtual void OnPlayerCollision(Player* myPlayer, Vector2D* movement) = 0;
 
 };
 

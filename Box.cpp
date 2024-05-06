@@ -14,7 +14,6 @@ void Box::PrintBox()
 	else {
 		std::cout << myElement->elementCharacter;
 	}
-	
 
 }
 

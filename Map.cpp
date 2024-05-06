@@ -6,7 +6,8 @@ Map::Map(GameConfigInfo * gameConfig) : gi(gameConfig)
 	field = new Box*[gi->ancho];   
 	//field = new Box * [7];
 	for (int i = 0; i < gi->ancho; ++i) 
-	{         
+	{   
+		
 		field[i] = new Box [gi->alto];     
 	}
 	
@@ -19,7 +20,7 @@ void Map::PrintBoxInMap(Box * myBox)
 void Map::InitMap(Player*myPlayer)
 {
 	field[myPlayer->myPosition->_x][myPlayer->myPosition->_y].myElement = myPlayer;
-	//InitMapElements();
+	InitMapElements();
 	PrintMap();
 	
 }

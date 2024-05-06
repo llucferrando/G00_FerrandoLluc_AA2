@@ -1,4 +1,5 @@
 C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\Box.cpp;C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\x64\Debug\Box.obj
+C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\Door.cpp;C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\x64\Debug\Door.obj
 C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\FileManager.cpp;C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\x64\Debug\FileManager.obj
 C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\GameConfigInfo.cpp;C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\x64\Debug\GameConfigInfo.obj
 C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\GameManager.cpp;C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\x64\Debug\GameManager.obj
@@ -7,5 +8,7 @@ C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\Main.cpp;C:\ENTI\1R CDI\Progra\G00_Fe
 C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\Map.cpp;C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\x64\Debug\Map.obj
 C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\MapElements.cpp;C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\x64\Debug\MapElements.obj
 C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\Player.cpp;C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\x64\Debug\Player.obj
+C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\PokeBall.cpp;C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\x64\Debug\PokeBall.obj
 C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\Pokemon.cpp;C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\x64\Debug\Pokemon.obj
 C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\Vector2D.cpp;C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\x64\Debug\Vector2D.obj
+C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\Walls.cpp;C:\ENTI\1R CDI\Progra\G00_FerrandoLluc_AA2\x64\Debug\Walls.obj
