@@ -1,34 +1,44 @@
 #include "Player.h"
-
+#include "Map.h"
+#include "GameManager.h"
 Player::Player()
 {
-	elementCharacter = "A";
-	pokemonsCaptured, pokeBallsCaptured = 0;
-	myPosition = new Vector2D(5, 5);
+	pokemonsCaptured = 0;
+	currentPokeballs = 99999;
+	position = new Vector2D(5, 5);
+	direction = new Vector2D(0, 0);
+	damage = 3;
 }
-std::set<Vector2D*> Player::CloseArea()
+
+
+void Player::Update(Map* map)
 {
-	myRadius.clear();
+	if (direction->x == 0 && direction->y == 0)
+		return;
 
-	//PLAYER POS
-	myRadius.insert(new Vector2D(myPosition->_x, myPosition->_y));
+	Vector2D nextPosition = *position;
+	nextPosition.x += direction->x;
+	nextPosition.y += direction->y;
 
-	//DRETA ESQUERRA ADALT ABAIX
-	myRadius.insert(new Vector2D(myPosition->_x + 1, myPosition->_y));
-	myRadius.insert(new Vector2D(myPosition->_x - 1, myPosition->_y));
-	myRadius.insert(new Vector2D(myPosition->_x, myPosition->_y + 1));
-	myRadius.insert(new Vector2D(myPosition->_x, myPosition->_y - 1));
+	switch (map->GetTile(nextPosition)) {
+		case TileType::Enemy:
+			GameManager::getInstance().gameState = GameState::Capturing;
+			GameManager::getInstance().fightingPokemon = map->getPokemonFromPosition(nextPosition);
+			break;
+		case TileType::PokeBall:
+			currentPokeballs++;
+			map->ClearTile(nextPosition);
+			map->SpawnPokeballRandomPosition(map->GetCuadrantFromPosition(nextPosition));
+			break;
+	}
 
-	//DIAGONALS
-	myRadius.insert(new Vector2D(myPosition->_x + 1, myPosition->_y + 1));
-	myRadius.insert(new Vector2D(myPosition->_x - 1, myPosition->_y + 1));
-	myRadius.insert(new Vector2D(myPosition->_x - 1, myPosition->_y - 1));
-	myRadius.insert(new Vector2D(myPosition->_x + 1, myPosition->_y - 1));
+	if (map->IsBlockingCollision(nextPosition))
+		return;
 
-	return myRadius;
+	map->ClearTile(*position);
+	position->x += direction->x;
+	position->y += direction->y;
+	map->UpdatePosition(*position, TileType::Player);
 }
 
-void Player::OnPlayerCollision(Player* myPlayer, Vector2D* movement)
-{
-	return;
-}
+

@@ -1,14 +1,29 @@
 #pragma once
-#include "MapElements.h"
-
-
-class Pokemon : public MapElements
+#include "Vector2D.h"
+#include <string> 
+extern class Map;
+class Pokemon
 {
-	public:
-	Pokemon();
-	
-	Vector2D * pokePos;
-	virtual void OnPlayerCollision(Player* myPlayer, Vector2D* movement) override;
+private:
+	int minTimeToMove;
+	int maxTimeToMove;
+	float currentTimeToMove;
+	float timeToMove;
+	DirectionType directionType;
 
+public:
+	Pokemon(int min,int max);
+	Vector2D* direction;
+	Vector2D* position;
+	std::string name;
+	int hp;
+	bool canMove;
+
+	int maxHp;
+	bool alive;
+	void Update(Map* map,float dt);
+	bool TryToCath();
+	void Disapear();
+	void GetDamage(float damage);
 };
 

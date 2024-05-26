@@ -4,14 +4,9 @@
 #include "GameManager.h"
 
 
+int main() {
 
-void main()
-{
-   
-    GameManager * myManager = new GameManager();
-    myManager->Init();
-   myManager->GameLoop();
-    myManager->Render();
-  
-    
+    GameManager::getInstance().GameLoop();
+
+    return 0;
 }

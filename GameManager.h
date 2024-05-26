@@ -1,29 +1,43 @@
 #pragma once
-#include "FileManager.h"
 #include "InputManager.h"
-#include "Vector2D.h"
-#include "Map.h"
 #include "GameConfigInfo.h"
-#include "Player.h"
+#include "Map.h"
 #include <cstdlib>
+enum Option { Attack, Catch, Scape };
 
+class GameManager {
+private:
+    GameManager();
 
-class GameManager
-{
-	public:
-        GameManager() {};
-		GameConfigInfo * gi = new GameConfigInfo;
-        Player* myPlayer = new Player();
-        Vector2D* movement = new Vector2D(0, 0);
-        InputManager* ip = new InputManager();
-        
-       
-        Map* myMap = new Map(gi);
-        bool isPlaying = true;
+    // Evitar la copia de la instancia
+    GameManager(const GameManager&) = delete;
+    GameManager& operator=(const GameManager&) = delete;
 
-        void Init();
-        void GameLoop();
-        void Render();
-	
+public:
+    // Miembros públicos
+    GameConfigInfo* config;
+    Player* player;
+    InputManager* inputManager;
+    GameState gameState;
+    Map* myMap;
+    float fps;
+    Option selectedOption = Attack;
+    Pokemon* fightingPokemon;
+
+    // Método estático para obtener la instancia única
+    static GameManager& getInstance() {
+        // Se garantiza que solo se crea una instancia
+        static GameManager instance;
+        return instance;
+    }
+
+    // Métodos públicos
+    void GameLoop();
+    void Render();
+    void RenderHud();
+    void RenderFigth();
+    void ChangeOption(int increment);
+    void ExecuteOption();
 };
 
+// Inicialización estática del puntero a nullptr

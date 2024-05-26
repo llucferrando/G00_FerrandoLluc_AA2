@@ -4,7 +4,9 @@ class GameConfigInfo
 {
 public:
     GameConfigInfo() { Code("config.txt"); };
-    int ancho, alto, pokemonsPPaleta, minPokemonsPPaleta, pokemonsBosque, minPokemonsBosque = 0;
+    int width, height, pokemonsPPaleta, minPokemonsPPaleta, pokemonsBosque, minPokemonsBosque, pokemonsCueva, minPokemonsCueva;
+    int minTimeToMove, maxTimeToMove;
+    int vidaMew;
 
     void Code(const std::string& filePath)
     {
@@ -17,12 +19,12 @@ public:
         std::istringstream iss(data);
         std::string token;
 
-        // Leemos los valores de cada línea y los asignamos a las variables correspondientes del struct
+        
         if (std::getline(iss, token, ';')) {
-            ancho = std::stoi(token);
+            width = std::stoi(token);
         }
         if (std::getline(iss, token, ';')) {
-            alto = std::stoi(token);
+            height = std::stoi(token);
         }
         if (std::getline(iss, token, ';')) {
             pokemonsPPaleta = std::stoi(token);
@@ -33,8 +35,23 @@ public:
         if (std::getline(iss, token, ';')) {
             pokemonsBosque = std::stoi(token);
         }
-        if (std::getline(iss, token)) {
+        if (std::getline(iss, token,';')) {
             minPokemonsBosque = std::stoi(token);
+        }
+        if (std::getline(iss, token, ';')) {
+            pokemonsCueva = std::stoi(token);
+        }
+        if (std::getline(iss, token, ';')) {
+            minPokemonsCueva = std::stoi(token);
+        }
+        if (std::getline(iss, token, ';')) {
+            minTimeToMove = std::stoi(token);
+        }
+        if (std::getline(iss, token, ';')) {
+            maxTimeToMove = std::stoi(token);
+        }
+        if (std::getline(iss, token, ';')) {
+            vidaMew = std::stoi(token);
         }
     }
 };

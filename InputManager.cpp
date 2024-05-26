@@ -1,81 +1,70 @@
 #include "InputManager.h"
 
-bool InputManager::Inputs(Vector2D * movement, bool &isPlaying)
+bool InputManager::Inputs(Player* player, GameState &state)
 {
-    static bool upKeyPressed = false;
-    static bool leftKeyPressed = false;
-    static bool downKeyPressed = false;
-    static bool rightKeyPressed = false;
-    static bool spaceKeyPressed = false;
-    static bool escKeyPressed = false;
-    isPlaying = true;
-    
+    player->direction = new Vector2D(0, 0);
 
-    if (GetAsyncKeyState(VK_UP))
+    if (GetAsyncKeyState(VK_UP))// Verify if up is pressed
     {
         if (!upKeyPressed){
             upKeyPressed = true;
-            movement->_y-=1;
-
+            player->direction->y = -1;
         }
     }else{
-        upKeyPressed = false;
+        upKeyPressed = false; // False when release key
     }
-    if (GetAsyncKeyState(VK_DOWN))
+    if (GetAsyncKeyState(VK_DOWN)) //Verify if down is pressed
     {
         if (!downKeyPressed) {
-            downKeyPressed = true;
-            movement->_y += 1;
+            downKeyPressed = true; //True if before not true
+            player->direction->y = +1;
         }
     }
     else {
-        downKeyPressed = false;
+        downKeyPressed = false; 
+        downKeyPressed = false; // False when release key
     }
     if (GetAsyncKeyState(VK_RIGHT))
     {
         if (!rightKeyPressed) {
             rightKeyPressed = true;
-            movement->_x += 1;
-            
+            player->direction->x = +1;
         }
     }
     else {
-        rightKeyPressed = false;
+        rightKeyPressed = false; // False when release key
     }
     if (GetAsyncKeyState(VK_LEFT))
     {
         if (!leftKeyPressed) {
             leftKeyPressed = true;
-             movement->_x -=1;
+            player->direction->x = -1;
         }
     }
     else {
-        leftKeyPressed = false;
+        leftKeyPressed = false; // False when release key
     }
     if (GetAsyncKeyState(VK_SPACE))
     {
         if (!spaceKeyPressed) {
             spaceKeyPressed = true;
-            std::cout << "Space";
         }
     }
     else {
-        spaceKeyPressed = false;
+        spaceKeyPressed = false; // False when release key
     }
     if (GetAsyncKeyState(VK_ESCAPE))
     {
         if (!escKeyPressed) {
             escKeyPressed = true;
-            isPlaying = false;
-            std::cout << isPlaying;
-            
+            state = GameOver;
         }
     }
     else {
-        escKeyPressed = false;
+        escKeyPressed = false; // False when release key
         
     }
-    return isPlaying;
+    return  state != GameOver;
 }
 
 

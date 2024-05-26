@@ -127,35 +127,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Box.h" />
-    <ClInclude Include="Door.h" />
     <ClInclude Include="FileManager.h" />
     <ClInclude Include="GameConfigInfo.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Map.h" />
-    <ClInclude Include="MapElements.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="PokeBall.h" />
     <ClInclude Include="Pokemon.h" />
     <ClInclude Include="Vector2D.h" />
-    <ClInclude Include="Walls.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Box.cpp" />
-    <ClCompile Include="Door.cpp" />
     <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="GameConfigInfo.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
-    <ClCompile Include="MapElements.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PokeBall.cpp" />
     <ClCompile Include="Pokemon.cpp" />
     <ClCompile Include="Vector2D.cpp" />
-    <ClCompile Include="Walls.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
