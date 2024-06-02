@@ -4,25 +4,24 @@ bool InputManager::Inputs(Player* player, GameState &state)
 {
     player->direction = new Vector2D(0, 0);
 
-    if (GetAsyncKeyState(VK_UP))// Verify if up is pressed
+    if (GetAsyncKeyState(VK_UP))
     {
         if (!upKeyPressed){
             upKeyPressed = true;
             player->direction->y = -1;
         }
     }else{
-        upKeyPressed = false; // False when release key
+        upKeyPressed = false;
     }
-    if (GetAsyncKeyState(VK_DOWN)) //Verify if down is pressed
+    if (GetAsyncKeyState(VK_DOWN)) // Verifica si la tecla DOWN está presionada en este momento
     {
         if (!downKeyPressed) {
-            downKeyPressed = true; //True if before not true
+            downKeyPressed = true; // Se establece como true solo si no estaba presionada previamente
             player->direction->y = +1;
         }
     }
     else {
-        downKeyPressed = false; 
-        downKeyPressed = false; // False when release key
+        downKeyPressed = false; // Se establece como false cuando la tecla se suelta
     }
     if (GetAsyncKeyState(VK_RIGHT))
     {
@@ -32,7 +31,7 @@ bool InputManager::Inputs(Player* player, GameState &state)
         }
     }
     else {
-        rightKeyPressed = false; // False when release key
+        rightKeyPressed = false;
     }
     if (GetAsyncKeyState(VK_LEFT))
     {
@@ -42,7 +41,7 @@ bool InputManager::Inputs(Player* player, GameState &state)
         }
     }
     else {
-        leftKeyPressed = false; // False when release key
+        leftKeyPressed = false;
     }
     if (GetAsyncKeyState(VK_SPACE))
     {
@@ -51,7 +50,7 @@ bool InputManager::Inputs(Player* player, GameState &state)
         }
     }
     else {
-        spaceKeyPressed = false; // False when release key
+        spaceKeyPressed = false;
     }
     if (GetAsyncKeyState(VK_ESCAPE))
     {
@@ -61,7 +60,7 @@ bool InputManager::Inputs(Player* player, GameState &state)
         }
     }
     else {
-        escKeyPressed = false; // False when release key
+        escKeyPressed = false;
         
     }
     return  state != GameOver;

@@ -19,7 +19,7 @@ public:
         std::istringstream iss(data);
         std::string token;
 
-        
+        // Leemos los valores de cada línea y los asignamos a las variables correspondientes del struct
         if (std::getline(iss, token, ';')) {
             width = std::stoi(token);
         }

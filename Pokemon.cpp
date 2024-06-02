@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "Map.h"
 #include "GameManager.h"
-
 Pokemon::Pokemon(int min,int max)
 {
 	directionType = static_cast<DirectionType>(rand() % 3);

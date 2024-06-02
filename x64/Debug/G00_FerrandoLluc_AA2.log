@@ -1,7 +1,0 @@
-﻿  Pokemon.cpp
-E:\1r CDI\PROGRAMACIÓ\Practiques\G00_FerrandoLluc_AA2\Pokemon.h(4,17): warning C4091: 'extern ': ignored on left of 'Map' when no variable is declared
-E:\1r CDI\PROGRAMACIÓ\Practiques\G00_FerrandoLluc_AA2\Player.h(3,17): warning C4091: 'extern ': ignored on left of 'Map' when no variable is declared
-E:\1r CDI\PROGRAMACIÓ\Practiques\G00_FerrandoLluc_AA2\Pokemon.cpp(26,58): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-E:\1r CDI\PROGRAMACIÓ\Practiques\G00_FerrandoLluc_AA2\Pokemon.cpp(59,21): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-E:\1r CDI\PROGRAMACIÓ\Practiques\G00_FerrandoLluc_AA2\Pokemon.cpp(71,8): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
-  G00_FerrandoLluc_AA2.vcxproj -> E:\1r CDI\PROGRAMACIÓ\Practiques\G00_FerrandoLluc_AA2\x64\Debug\G00_FerrandoLluc_AA2.exe
