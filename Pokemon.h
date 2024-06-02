@@ -18,6 +18,7 @@ public:
 	std::string name;
 	int hp;
 	bool canMove;
+	int cuadrant;
 
 	int maxHp;
 	bool alive;

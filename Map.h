@@ -5,7 +5,7 @@
 #include <vector>
 #define screenDrawStartPosX 30
 #define screenDrawStartPosY 7
-enum class TileType {None = ' ', Player = 'A', Enemy = 'P', Wall= 'X' ,PokeBall = 'O'};
+enum class TileType {None = ' ', Player = 'A', Enemy = 'P', Wall= 'X' ,PokeBall = 'O', Mew = 'M' };
 class Map
 {
 private:
@@ -13,6 +13,7 @@ private:
 	TileType** tiles;
 	int width;
 	int height;
+	Pokemon* mew;
 public:
 	bool unlockedBosque;
 	bool unlockedCuevaCeleste;
@@ -41,5 +42,7 @@ public:
 	void SpawnPokeballRandomPosition(int cuadrant);
 	Vector2D* GetCenterPositionOfCuadrant(int cuadrant);
 	void BreakCuadrantWall(int cuadrant);
+	bool isMewAlive();
+	bool isPositionInCuadrant(Vector2D _position, int cuadrant);
 };
 

@@ -32,6 +32,7 @@ bool Map::IsBlockingCollision(Vector2D position)
 	case TileType::Player:
 		return true;
 		break;
+	case TileType::Mew:
 	case TileType::Enemy:
 		return true;
 		break;
@@ -92,13 +93,13 @@ Vector2D* Map::GetRandomPositionFromCuadrant(int cuadrant) {
 		startY = 1;
 		endY = halfHeight - 1;
 		break;
-	case 3: // Bottom-left
+	case 4: // Bottom-left
 		startX = 1;
 		endX = halfWidth - 1;
 		startY = halfHeight + 1;
 		endY = height - 2;
 		break;
-	case 4: // Bottom-right
+	case 3: // Bottom-right
 		startX = halfWidth + 1;
 		endX = width - 2;
 		startY = halfHeight + 1;
@@ -135,13 +136,13 @@ Vector2D* Map::GetCenterPositionOfCuadrant(int cuadrant) {
 		startY = 1;
 		endY = halfHeight - 1;
 		break;
-	case 3: // Bottom-left
+	case 4: // Bottom-left
 		startX = 1;
 		endX = halfWidth - 1;
 		startY = halfHeight + 1;
 		endY = height - 2;
 		break;
-	case 4: // Bottom-right
+	case 3: // Bottom-right
 		startX = halfWidth + 1;
 		endX = width - 2;
 		startY = halfHeight + 1;
@@ -156,20 +157,69 @@ Vector2D* Map::GetCenterPositionOfCuadrant(int cuadrant) {
 
 	return new Vector2D(centerX, centerY);
 }
-void Map::BreakCuadrantWall(int cuadrant)
-{
-	if(cuadrant == 3)
-		for (int x = config->width / 2; x < config->width; ++x)
+void Map::BreakCuadrantWall(int cuadrant) {
+	if (cuadrant == 3) {
+		for (int x = config->width / 2 + 1; x < config->width - 1; ++x) {
 			tiles[x][config->height / 2] = TileType::None;
-
-	if (cuadrant == 2)
-		for (int y = 0; y < config->height / 2; ++y)
+		}
+	}
+	if (cuadrant == 2) {
+		for (int y = 1; y < config->height / 2; ++y) {
 			tiles[config->width / 2][y] = TileType::None;
-
-	if (cuadrant == 4)
-		for (int y = config->height / 2; y < config->height; ++y)
+		}
+	}
+	if (cuadrant == 4) {
+		for (int y = config->height / 2 + 1; y < config->height - 1; ++y) {
 			tiles[config->width / 2][y] = TileType::None;
+		}
+	}
+}
+bool Map::isMewAlive()
+{
+	return mew->alive;
+}
+bool Map::isPositionInCuadrant(Vector2D _position, int cuadrant) {
+	int startX, endX, startY, endY;
 
+	int halfWidth = width / 2;
+	int halfHeight = height / 2;
+
+	switch (cuadrant) {
+	case 1: // Top-left
+		startX = 1;
+		endX = halfWidth - 1;
+		startY = 1;
+		endY = halfHeight - 1;
+		break;
+	case 2: // Top-right
+		startX = halfWidth + 1;
+		endX = width - 2;
+		startY = 1;
+		endY = halfHeight - 1;
+		break;
+	case 4: // Bottom-left
+		startX = 1;
+		endX = halfWidth - 1;
+		startY = halfHeight + 1;
+		endY = height - 2;
+		break;
+	case 3: // Bottom-right
+		startX = halfWidth + 1;
+		endX = width - 2;
+		startY = halfHeight + 1;
+		endY = height - 2;
+		break;
+	default:
+		return false; // Cuadrante inválido
+	}
+
+	if (_position.x >= startX && _position.x <= endX &&
+		_position.y >= startY && _position.y <= endY) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 Pokemon* Map::getPokemonFromPosition(Vector2D position)
 {
@@ -196,11 +246,11 @@ int Map::GetCuadrantFromPosition(Vector2D position)
 	}
 	else if (position.x >= 1 && position.x <= halfWidth && position.y >= halfHeight + 1 && position.y <= height - 2)
 	{
-		return 3;
+		return 4;
 	}
 	else if (position.x >= halfWidth + 1 && position.x <= width - 2 && position.y >= halfHeight + 1 && position.y <= height - 2)
 	{
-		return 4;
+		return 3;
 	}
 	else
 	{
@@ -262,27 +312,33 @@ void Map::GenPokemons()
 	{
 		Pokemon* newPokemon = new Pokemon(config->minTimeToMove,config->maxTimeToMove);
 		newPokemon->position = GetRandomPositionFromCuadrant(1);
+		newPokemon->cuadrant = 1;
 		pokemons.push_back(newPokemon);
 	}
 	for (int i = 0; i < config->pokemonsBosque; i++)
 	{
 		Pokemon* newPokemon = new Pokemon(config->minTimeToMove, config->maxTimeToMove);
 		newPokemon->position = GetRandomPositionFromCuadrant(2);
+		newPokemon->cuadrant = 2;
 		pokemons.push_back(newPokemon);
 	}
 	for (int i = 0; i < config->pokemonsCueva; i++)
 	{
 		Pokemon* newPokemon = new Pokemon(config->minTimeToMove, config->maxTimeToMove);
 		newPokemon->position = GetRandomPositionFromCuadrant(3);
+		newPokemon->cuadrant = 3;
 		pokemons.push_back(newPokemon);
 	}
 
-		Pokemon* newPokemon = new Pokemon(config->minTimeToMove, config->maxTimeToMove);
-		newPokemon->name = "Mew";
-		newPokemon->canMove = false;
-		newPokemon->maxHp = config->vidaMew;
-		newPokemon->position = GetCenterPositionOfCuadrant(4);
-		pokemons.push_back(newPokemon);
+	mew = new Pokemon(config->minTimeToMove, config->maxTimeToMove);
+	mew->name = "Mew";
+	mew->canMove = false;
+	mew->maxHp = config->vidaMew;
+	mew->position = GetCenterPositionOfCuadrant(3);
+	mew->cuadrant = 3;
+	pokemons.push_back(mew);
+	UpdatePosition(*mew->position, TileType::Mew);
+
 }
 void Map::Update(float dt)
 {

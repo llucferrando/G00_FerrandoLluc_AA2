@@ -45,6 +45,8 @@ void Pokemon::Update(Map* map,float dt)
 
 	if (map->IsBlockingCollision(nextPosition))
 		return;
+	if (!map->isPositionInCuadrant(nextPosition,cuadrant))
+		return;
 
 	map->ClearTile(*position);
 	position->x += direction->x;
@@ -68,8 +70,11 @@ void Pokemon::Disapear()
 void Pokemon::GetDamage(float damage)
 {
 	hp -= damage;
-	if (hp <= 0)
+	if (hp <= 0) 
+	{
 		hp = 0;
+		Disapear();
+	}
 }
 
 

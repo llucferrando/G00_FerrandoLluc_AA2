@@ -3,7 +3,7 @@
 GameManager::GameManager()
 {
 	config = new GameConfigInfo();
-	gameState = GameState::Scauting;
+	gameState = GameState::Menu;
 	inputManager = new InputManager();
 	myMap = new Map(config);
 	player = new Player();
@@ -16,39 +16,56 @@ GameManager::GameManager()
 void GameManager::GameLoop()
 {
 	//GAME LOOP
-	while(gameState != GameOver)
+	while(Playing())
 	{
 		float dt = 1000 / fps;
 		Sleep(dt);
 
-		inputManager->Inputs(player, gameState);
+		inputManager->Inputs(gameState);
 		switch (gameState)
 		{
+		case Menu:
+			if (inputManager->upKeyPressed)
+				ChangeOption(-1, 2);
+			if (inputManager->downKeyPressed)
+				ChangeOption(1, 2);
+			if (inputManager->spaceKeyPressed)
+				ExecuteOptionMenu();
+			break;
 		case Scauting:	
+			player->Inputs(inputManager);
 			player->Update(myMap);
 			myMap->Update(dt);
 
 			break;
 		case Capturing:
 			if (inputManager->upKeyPressed)
-				ChangeOption(-1);
+				ChangeOption(-1,3);
 			if (inputManager->downKeyPressed)
-				ChangeOption(1);
+				ChangeOption(1,3);
 			if (inputManager->spaceKeyPressed)
 				ExecuteOption();
 			break;
 		default:
 			break;
 		}
-		Render();
-
-
+		if(Playing())
+			Render();
 	}
+	if (gameState == Win)
+		WinScreen();
+	if (gameState == GameOver)
+		GameOverScreen();
 }
 
 void GameManager::Render()
 {
 	system("cls");
+	if (gameState == Menu) 
+	{
+		RenderMenu();
+		return;
+	}
 	RenderHud();
 	myMap->PrintMap(player,5);
 	RenderFigth();
@@ -64,9 +81,53 @@ void GameManager::RenderHud()
 
 	for (int i = 0; i < screenDrawStartPosX - TopOffset; i++)
 		std::cout << " ";
-	std::cout << "              Nombre ciudad";
+
+	switch (myMap->GetCuadrantFromPosition(*player->position))
+	{
+	case 1:
+		std::cout << "              Pueblo Paleta";
+		break;
+	case 2:
+		std::cout << "              Bosque";
+		break;
+	case 3:
+		std::cout << "              Cueva Celeste";
+		break;
+	case 4:
+
+		std::cout << "              Liga PokeEnti";
+		if (!myMap->isMewAlive()) 
+		{
+			gameState = Win;
+		}else
+			gameState = GameOver;
+
+		break;
+	}
+}
+
+void GameManager::RenderMenu()
+{
+	int botOffset = 3;
+
+	for (int i = 0; i < screenDrawStartPosX - botOffset; i++)
+		std::cout << " ";
+	std::cout << "Menu " << "\n";
+
+	for (int i = 0; i < screenDrawStartPosX - botOffset; i++)
+		std::cout << " ";
+	std::cout << "Play";
+	if (selectedOption == Attack)
+		std::cout << "  <-----";
+	std::cout << std::endl;
 
 
+	for (int i = 0; i < screenDrawStartPosX - botOffset; i++)
+		std::cout << " ";
+	std::cout << "Quit";
+	if (selectedOption == Catch)
+		std::cout << "  <-----";
+	std::cout << std::endl;
 }
 
 void GameManager::RenderFigth()
@@ -104,11 +165,13 @@ void GameManager::RenderFigth()
 
 }
 
-void GameManager::ChangeOption(int increment)
+void GameManager::ChangeOption(int increment,int options)
 {
-	selectedOption = static_cast<Option>((static_cast<int>(selectedOption) + increment) % 3);
+	selectedOption = static_cast<Option>((static_cast<int>(selectedOption) + increment) % options);
 	if (selectedOption < 0)
-		selectedOption = Option::Scape;
+		selectedOption = static_cast<Option>((static_cast<int>(options - 1)));
+	if(selectedOption > static_cast<Option>((static_cast<int>(options))))
+		selectedOption = static_cast<Option>((static_cast<int>(0)));
 }
 
 void GameManager::ExecuteOption()
@@ -117,6 +180,8 @@ void GameManager::ExecuteOption()
 	{
 	case Attack:
 		fightingPokemon->GetDamage(player->damage);
+		if(!fightingPokemon->alive)
+			gameState = Scauting;
 		break;
 	case Catch:
 		if (player->currentPokeballs > 0)
@@ -124,7 +189,7 @@ void GameManager::ExecuteOption()
 			player->currentPokeballs--;
 			if (fightingPokemon->TryToCath())
 			{
- 				player->pokemonsCaptured += 10;
+ 				player->pokemonsCaptured += 1;
 				if (player->pokemonsCaptured > config->minPokemonsPPaleta)
 					myMap->BreakCuadrantWall(2);
 				if (player->pokemonsCaptured > config->minPokemonsCueva)
@@ -146,6 +211,62 @@ void GameManager::ExecuteOption()
 	default:
 		break;
 	}
+
+}
+
+void GameManager::ExecuteOptionMenu()
+{
+	switch (selectedOption)
+	{
+	case Attack:
+		gameState = Scauting;
+		break;
+	case Catch:
+		gameState = Exit;
+		break;
+	}
+}
+
+void GameManager::GameOverScreen()
+{
+	system("cls");
+	int TopOffset = 15;
+	for (int i = 0; i < 5; i++)
+		std::cout << "\n";
+	for (int i = 0; i < screenDrawStartPosX - TopOffset; i++)
+		std::cout << " ";
+
+	std::cout << "Pokemons Capturados [" << player->pokemonsCaptured << "]  PokeBalls  [" << player->currentPokeballs << "]\n\n";
+
+	for (int i = 0; i < screenDrawStartPosX - TopOffset; i++)
+		std::cout << " ";
+	std::cout << "Perdiste, has llegado a liga POKEenti sin capturar a MEWTWO" << std::endl;
+
+	for (int i = 0; i < 20; i++)
+		std::cout << "\n";
+}
+
+void GameManager::WinScreen()
+{
+	system("cls");
+	int TopOffset = 15;
+	for (int i = 0; i < 5; i++)
+		std::cout << "\n";
+	for (int i = 0; i < screenDrawStartPosX - TopOffset; i++)
+		std::cout << " ";
+
+	std::cout << "Pokemons Capturados [" << player->pokemonsCaptured << "]  PokeBalls  [" << player->currentPokeballs << "]\n\n";
+
+	for (int i = 0; i < screenDrawStartPosX - TopOffset; i++)
+		std::cout << " ";
+	std::cout << "Has ganado! Llegaste a la liga POKEenti derrotando a MEWTWO" << std::endl;
+	for (int i = 0; i < 20; i++)
+		std::cout << "\n";
+}
+
+bool GameManager::Playing()
+{
+	return gameState != GameOver && gameState != Win && gameState != Exit;
 }
 
 	

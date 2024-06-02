@@ -1,8 +1,7 @@
 #pragma once
 #include <iostream>
-#include "Player.h"
 #include "Windows.h"
-enum GameState { Scauting, Capturing, GameOver };
+enum GameState { Menu,Scauting, Capturing, GameOver,Win,Exit };
 
 
 class InputManager
@@ -16,6 +15,6 @@ public:
     bool spaceKeyPressed;
     bool escKeyPressed;
 
-	bool Inputs(Player* player, GameState &state);
+	bool Inputs(GameState &state);
 };
 

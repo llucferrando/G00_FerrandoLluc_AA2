@@ -35,9 +35,14 @@ public:
     void GameLoop();
     void Render();
     void RenderHud();
+    void RenderMenu();
     void RenderFigth();
-    void ChangeOption(int increment);
+    void ChangeOption(int increment,int options);
     void ExecuteOption();
+    void ExecuteOptionMenu();
+    void GameOverScreen();
+    void WinScreen();
+    bool Playing();
 };
 
 // Inicialización estática del puntero a nullptr
